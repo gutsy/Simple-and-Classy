@@ -17,7 +17,8 @@ You can use the url localhost:4567/user/username, where username is the user you
 
 You can use a POST to hit the URL localhost:4567/login with a JSON object like  {"name":"testing1", "password":"whatever"}
 
-You can test this with a CURL command: curl -i -X POST -d '{"name":"testing1", "password":"whatever"}' localhost:4567/login 
+You can test this with a CURL command: 
+curl -i -X POST -d '{"name":"testing1", "password":"whatever"}' localhost:4567/login 
 
 You will recieve a JSON object back, containing name and permissions properties, like this: {"name":"testing1","permissions":"all"}. 
 

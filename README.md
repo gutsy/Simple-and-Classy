@@ -28,4 +28,4 @@ This web service is obviously not actually checking the password, as this is a s
 
 This is not very secure, it is not meant to be. It's simply a stub service to get you going on custom login modules until the actual web service will be built. 
 
-Soon, this will be updated to take a JSON string instead of just a username, so you can fake out sending a username and password. 
+Feel free to update the users and permission coming back. These are just stub permissions. This is simply a service for your login module to hit so that it gets some JSON back.  

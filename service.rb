@@ -1,5 +1,6 @@
-require 'sinatra'
 require 'rubygems'
+require 'sinatra'
+require 'sinatra/json'
 require 'net/http'
 require 'json'
 
@@ -17,3 +18,11 @@ get '/user/:name' do
 	content_type :json
     { :name => name, :permissions => permission }.to_json
 end 
+
+post '/login' do
+	data = JSON.parse(request.body.read)
+	name = data["name"]
+	permission = fakeDB[name]
+	{ :name => name, :permissions => permission }.to_json
+end
+

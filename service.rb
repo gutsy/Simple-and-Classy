@@ -11,7 +11,6 @@ fakeDB = {
 }
 
 get '/user/:name' do
-
 	name = params[:name]
 	permission = fakeDB[name]
 
@@ -21,8 +20,10 @@ end
 
 post '/login' do
 	data = JSON.parse(request.body.read)
+
 	name = data["name"]
 	permission = fakeDB[name]
+	
 	{ :name => name, :permissions => permission }.to_json
 end
 

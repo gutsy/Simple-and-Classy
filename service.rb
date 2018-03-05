@@ -5,26 +5,28 @@ require 'net/http'
 require 'json'
 
 fakeDB = {
-  'testing1' => 'all',
-  'testing2' => 'mining',
-  'testing3' => 'truck'
+  'testing1@email.com' => 'password',
+  'testing2@email.com' => 'whatever',
+  'testing3@email.com' => 'admin'
 }
-
-get '/user/:name' do
-  name = params[:name]
-  permission = fakeDB[name]
-
-  content_type :json
-  { :name => name, :permissions => permission }.to_json
-end
 
 post '/login' do
   data = JSON.parse(request.body.read)
 
   name = data["name"]
-  permission = fakeDB[name]
+  passwordSent = data["password"]
+  password = fakeDB[name]
+  success = passwordSent.eql? password
 
-  { :name => name, :permissions => permission }.to_json
+  {:success => success }.to_json
 end
 
+post '/register' do
+  data = JSON.parse(request.body.read)
+  username = data["email"]
+  password = data["password"]
+  #this is a mock, if the data we "succeed"
+  success = !((username.nil? || username.empty?) || (password.nil? || password.empty?))
+  {:success => success}.to_json
+end
 #just a test

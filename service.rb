@@ -25,7 +25,7 @@ post '/register' do
   data = JSON.parse(request.body.read)
   email = data["email"]
   password = data["password"]
-  #this is a mock, if the data we "succeed"
+  #this is a mock, if there's data we "succeed"
   success = !((email.nil? || email.empty?) || (password.nil? || password.empty?))
   if success
     fakeDB[email] = password

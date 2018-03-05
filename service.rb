@@ -13,9 +13,9 @@ fakeDB = {
 post '/login' do
   data = JSON.parse(request.body.read)
 
-  name = data["name"]
+  email = data["email"]
   passwordSent = data["password"]
-  password = fakeDB[name]
+  password = fakeDB[email]
   success = passwordSent.eql? password
 
   {:success => success }.to_json
@@ -23,10 +23,13 @@ end
 
 post '/register' do
   data = JSON.parse(request.body.read)
-  username = data["email"]
+  email = data["email"]
   password = data["password"]
   #this is a mock, if the data we "succeed"
-  success = !((username.nil? || username.empty?) || (password.nil? || password.empty?))
+  success = !((email.nil? || email.empty?) || (password.nil? || password.empty?))
+  if success
+    fakeDB[email] = password
+  end
   {:success => success}.to_json
 end
 #just a test

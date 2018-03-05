@@ -11,6 +11,7 @@ fakeDB = {
 }
 
 post '/login' do
+  response['Access-Control-Allow-Origin'] = '*'
   data = JSON.parse(request.body.read)
 
   email = data["email"]
@@ -22,6 +23,7 @@ post '/login' do
 end
 
 post '/register' do
+  response['Access-Control-Allow-Origin'] = '*'
   data = JSON.parse(request.body.read)
   email = data["email"]
   password = data["password"]

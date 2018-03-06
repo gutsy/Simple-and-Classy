@@ -47,6 +47,7 @@ end
 
 post '/changepassword' do
   response['Access-Control-Allow-Origin'] = '*'
+  passwordChanged = false
   data = JSON.parse(request.body.read)
   email = data["email"]
   password = fakeDB[email]
@@ -54,11 +55,13 @@ post '/changepassword' do
   newPassword = data["newPassword"]
   #this is a mock, if the email is a registered email, it's success
   password = fakeDB[email]
-  success = passwordSent.eql? password
+  emailFound = !(password.nil? || password.empty?)
+  passwordMatches = passwordSent.eql? password
 
-  if success
+  if (emailFound && passwordMatches)
     fakeDB[email] = newPassword
+    passwordChanged = true
   end
 
-  {:success => success}.to_json
+  {:emailFound => emailFound, :passwordChanged => passwordChanged}.to_json
 end

@@ -34,4 +34,14 @@ post '/register' do
   end
   {:success => success}.to_json
 end
+
+post '/forgotpassword' do
+  response['Access-Control-Allow-Origin'] = '*'
+  data = JSON.parse(request.body.read)
+  email = data["email"]
+  #this is a mock, if the email is a registered email, it's success
+  password = fakeDB[email]
+  success = !(password.nil? || password.empty?)
+  {:success => success}.to_json
+end
 #just a test
